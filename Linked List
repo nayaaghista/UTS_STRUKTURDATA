@@ -1,0 +1,53 @@
+#include <iostream>
+
+// Node class untuk merepresentasikan setiap elemen dalam linked list
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Linked list class untuk mengelola linked list
+class LinkedList {
+public:
+    Node* head;
+    LinkedList() {
+        this->head = NULL;
+    }
+
+    // Menambahkan elemen baru di awal linked list
+    void addNode(int data) {
+        Node* newNode = new Node(data);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    // Menampilkan isi linked list
+    void displayList() {
+        Node* temp = head;
+        while (temp != NULL) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    LinkedList list;
+    
+    // Menambahkan elemen ke linked list
+    list.addNode(3);
+    list.addNode(7);
+    list.addNode(12);
+    
+    // Menampilkan isi linked list
+    std::cout << "Linked List: ";
+    list.displayList();
+    
+    return 0;
+}
