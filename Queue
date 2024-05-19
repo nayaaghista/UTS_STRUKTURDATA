@@ -1,0 +1,77 @@
+#include <iostream>
+
+// Node class untuk merepresentasikan setiap elemen dalam queue
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Queue class untuk mengelola queue
+class Queue {
+private:
+    Node* front;
+    Node* rear;
+public:
+    Queue() {
+        front = NULL;
+        rear = NULL;
+    }
+
+    // Menambahkan elemen ke dalam queue
+    void enqueue(int data) {
+        Node* newNode = new Node(data);
+        if (rear == NULL) {
+            front = newNode;
+            rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+        }
+    }
+
+    // Menghapus elemen dari queue
+    void dequeue() {
+        if (front == NULL) {
+            std::cout << "Queue is empty" << std::endl;
+        } else {
+            Node* temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
+
+    // Menampilkan elemen yang ada di dalam queue
+    void displayQueue() {
+        Node* temp = front;
+        while (temp != NULL) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    Queue queue;
+    
+    // Menambahkan elemen ke dalam queue
+    queue.enqueue(5);
+    queue.enqueue(10);
+    queue.enqueue(15);
+    
+    // Menampilkan isi queue
+    std::cout << "Queue: ";
+    queue.displayQueue();
+    
+    // Menghapus elemen dari queue
+    queue.dequeue();
+    std::cout << "Queue after dequeue: ";
+    queue.displayQueue();
+    
+    return 0;
+}
